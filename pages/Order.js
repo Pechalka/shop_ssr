@@ -9,6 +9,7 @@ class Order extends React.Component {
 	componentDidMount() {
 		this.props.resetOrderMsg()
 	}
+
 	render() {
 		const { orderMsg } = this.props;
 
@@ -21,7 +22,7 @@ class Order extends React.Component {
 		return (
 			<div>
 				<OrderItems />
-				<OrderForm />
+				<OrderForm  />
 			</div>
 		)
 	}

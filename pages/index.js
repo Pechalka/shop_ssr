@@ -3,10 +3,11 @@ import fetch from 'isomorphic-unfetch'
 import { addProduct } from '../store';
 import { connect } from 'react-redux';
 
+import { getProducts } from '../api';
+
 class Index extends React.Component {
 	static getInitialProps = ({ req, query }) => {
-		return fetch('http://localhost:5000/api/products')
-		.then(response => response.json())
+		return getProducts()
 		.then(products => ({ products, category: query.category }))
 	}
 	
@@ -32,7 +33,6 @@ class Index extends React.Component {
 	render() {
 		const { products, categories } = this.props;
 		return (
-			<div>
 			<div>
 				{categories.map(category => {
 					const productsInCategory = products.filter(p => p.category_id === category.id)
@@ -61,9 +61,7 @@ class Index extends React.Component {
 							))}
 						</div>
 					</div>
-				)})}
-				
-			</div>
+				)})}				
 			</div>
 		)		
 	}

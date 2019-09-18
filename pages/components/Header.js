@@ -1,5 +1,4 @@
 import React from 'react';
-// import Link from 'next/link';
 import {Link} from '../../routes'
 
 import { connect } from 'react-redux';
@@ -49,5 +48,8 @@ class Header extends React.Component {
 }
 
 export default connect(
-	state => ({ categories: state.categories, totalPrice: state.cart.totalPrice })
+	state => ({ 
+		categories: state.categories, 
+		totalPrice: state.cart.totalPrice 
+	})
 )(Header);

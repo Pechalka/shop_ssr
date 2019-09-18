@@ -4,7 +4,7 @@ import withReduxStore from '../lib/with-redux-store'
 import { Provider } from 'react-redux'
 import Header from './components/Header';
 
-import { appInit } from '../store';
+import { appInit, initializeStore } from '../store';
 
 class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx, req }) {
@@ -35,4 +35,4 @@ class MyApp extends App {
   }
 }
 
-export default withReduxStore(MyApp)
+export default withReduxStore(MyApp, initializeStore)
