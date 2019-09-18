@@ -4,25 +4,40 @@ import { addProduct } from '../store';
 import { connect } from 'react-redux';
 
 class Index extends React.Component {
-	static getInitialProps = ({ req }) => {
+	static getInitialProps = ({ req, query }) => {
 		return fetch('http://localhost:5000/api/products')
 		.then(response => response.json())
-		.then(products => ({ products }))
+		.then(products => ({ products, category: query.category }))
 	}
 	
+	scrollToSection = () => {		
+		const key = this.props.category;
+		
+		const section = this.refs[key];
+
+		if (!section) return ;
+		section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
 	componentDidMount() {
-		var key = window.location.pathname.replace('/', '');
-		console.log('componentDidMount', key);
+		this.scrollToSection();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.category !== this.props.category) {
+			this.scrollToSection();
+		}	
 	}
 
 	render() {
 		const { products, categories } = this.props;
 		return (
 			<div>
+			<div>
 				{categories.map(category => {
 					const productsInCategory = products.filter(p => p.category_id === category.id)
 					return (
-					<div key={category.id}>
+					<div key={category.key} id={category.key} ref={category.key}>
 						<h2 className="category-title">{category.name}</h2>
 						<div className="products-list">
 							{productsInCategory.map(p => (
@@ -48,6 +63,7 @@ class Index extends React.Component {
 					</div>
 				)})}
 				
+			</div>
 			</div>
 		)		
 	}

@@ -18,7 +18,10 @@ const app = next({
   dev
 })
 
-const handle = app.getRequestHandler()
+const routes = require('./routes');
+const handle = routes.getRequestHandler(app)
+
+// const handle = app.getRequestHandler()
 
 let server
 app

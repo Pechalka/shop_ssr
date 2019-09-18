@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import {Link} from '../../routes'
 
 import { connect } from 'react-redux';
 
@@ -16,7 +17,7 @@ class Header extends React.Component {
 					<ul className='menu1'>
 						{categories.map(c => (
 							<li key={c.id}>
-								<Link href={'/'} >
+								<Link scroll={false} route='home' params={{ category: c.key }} >
 									<a>{c.name}</a>
 								</Link>
 							</li>
