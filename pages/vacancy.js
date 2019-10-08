@@ -1,12 +1,18 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputText from './components/InputText';
 
-const Vacancy = ({ contents }) => (
-	<InputText html={contents['vacancy']} />
-)
+const Vacancy = ({ vacancyHtml }) => (
+  <InputText html={vacancyHtml} />
+);
+
+Vacancy.propTypes = {
+  vacancyHtml: PropTypes.string.isRequired,
+};
 
 export default connect(
-	state => ({
-		contents: state.contents
-	})
+  (state) => ({
+    vacancyHtml: state.contents['vacancy'],
+  }),
 )(Vacancy);
